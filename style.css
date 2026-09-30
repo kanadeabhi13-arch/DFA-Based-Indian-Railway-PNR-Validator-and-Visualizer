@@ -1,0 +1,63 @@
+:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--accent:#38bdf8;--ok:#22c55e;--bad:#ef4444;--line:#475569}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+header{padding:28px 20px;text-align:center;background:linear-gradient(135deg,#1d4ed8,#0e7490)}
+header h1{margin:0;font-size:1.9rem}
+header h1 span{font-weight:400;opacity:.9}
+header p{margin:6px 0 0;opacity:.9}
+main{max-width:1180px;margin:20px auto;padding:0 14px;display:grid;gap:16px}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;box-shadow:0 4px 18px #0006}
+h2{margin:0 0 12px;font-size:1.15rem;color:var(--accent)}
+h3{margin:16px 0 8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=text]{flex:1;min-width:220px;padding:12px 14px;font-size:1.2rem;letter-spacing:2px;font-family:ui-monospace,Consolas,monospace;border-radius:10px;border:2px solid var(--line);background:#0f172a;color:var(--text)}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+button{padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:#334155;color:var(--text);font-size:.95rem;cursor:pointer}
+button:hover{background:#3f4f66}
+button.primary{background:var(--accent);color:#04202e;border-color:var(--accent);font-weight:700}
+.examples{margin-top:10px;font-size:.9rem;color:var(--muted)}
+.examples a{color:var(--accent);margin-left:8px;text-decoration:none;font-family:ui-monospace,monospace}
+.examples a:hover{text-decoration:underline}
+.result{margin-top:14px;padding:12px 16px;border-radius:10px;font-weight:600}
+.result.ok{background:#14532d;border:1px solid var(--ok)}
+.result.bad{background:#7f1d1d;border:1px solid var(--bad)}
+.hidden{display:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;min-height:44px}
+.chip{width:38px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#0f172a;border:2px solid var(--line);font-family:ui-monospace,monospace;font-size:1.2rem}
+.chip.done{border-color:var(--ok);color:var(--ok)}
+.chip.done.badc{border-color:var(--bad);color:var(--bad)}
+.chip.now{border-color:var(--accent);background:#0c4a6e;transform:translateY(-3px)}
+.controls{margin-bottom:10px}
+.controls label{color:var(--muted);font-size:.9rem;display:flex;gap:6px;align-items:center}
+.muted{color:var(--muted)}.small{font-size:.85rem}
+.svgwrap{overflow-x:auto;background:#0b1220;border-radius:10px;border:1px solid #334155}
+#dfa{min-width:900px;width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle;border:2px solid var(--line)}
+.dot.start{border-color:#a78bfa}.dot.cur{background:var(--accent);border-color:var(--accent)}.dot.acc{border-color:var(--ok)}.dot.dead{border-color:var(--bad)}
+/* svg */
+.node circle{fill:#1e293b;stroke:var(--line);stroke-width:2.5;transition:.25s}
+.node text{fill:var(--text);font-size:15px;text-anchor:middle;dominant-baseline:central;font-family:ui-monospace,monospace}
+.node.accept .ring{fill:none;stroke:var(--ok);stroke-width:2}
+.node.dead circle{stroke:var(--bad)}
+.node.start circle.main{stroke:#a78bfa}
+.node.active circle.main{fill:var(--accent);stroke:#fff}
+.node.active text{fill:#04202e;font-weight:700}
+.node.active.dead circle.main{fill:var(--bad)}
+.node.active.dead text{fill:#fff}
+.node.active.accept circle.main{fill:var(--ok)}
+.edge{stroke:var(--line);stroke-width:1.8;fill:none}
+.edge.deadedge{stroke:#7f1d1d;stroke-dasharray:4 4;stroke-width:1.2}
+.edge.taken{stroke:var(--accent);stroke-width:3.5;stroke-dasharray:none}
+.edge.taken.deadedge{stroke:var(--bad)}
+.elabel{fill:var(--muted);font-size:13px;text-anchor:middle;font-family:ui-monospace,monospace}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-family:ui-monospace,Consolas,monospace;font-size:.9rem}
+th,td{border:1px solid #334155;padding:6px 10px;text-align:center}
+th{background:#0f172a;color:var(--accent)}
+tr.hl td{background:#0c4a6e}
+tr.hlbad td{background:#7f1d1d}
+.mono,.mono li{font-family:ui-monospace,Consolas,monospace}
+ul.mono{line-height:1.9}
+footer{text-align:center;color:var(--muted);padding:24px;font-size:.85rem}
+@media(max-width:600px){header h1{font-size:1.4rem}}

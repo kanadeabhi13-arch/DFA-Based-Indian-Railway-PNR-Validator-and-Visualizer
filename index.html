@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PNR Validator & DFA Visualizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🚆 Indian Railway PNR Validator <span>&amp; DFA Visualizer</span></h1>
+  <p>Finite Automata &amp; Formal Language project — a PNR is accepted only if a DFA ends in its final state.</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>1. Enter PNR</h2>
+    <div class="row">
+      <input id="pnr" type="text" placeholder="e.g. 4521367890" autocomplete="off" maxlength="30" spellcheck="false">
+      <button id="btnValidate" class="primary">Validate</button>
+      <button id="btnReset">Reset</button>
+    </div>
+    <div class="examples">Try:
+      <a href="#" data-ex="4521367890">4521367890 ✔</a>
+      <a href="#" data-ex="0521367890">0521367890 ✘</a>
+      <a href="#" data-ex="452136789">452136789 ✘</a>
+      <a href="#" data-ex="45213678901">45213678901 ✘</a>
+      <a href="#" data-ex="45A1367890">45A1367890 ✘</a>
+    </div>
+    <div id="result" class="result hidden"></div>
+  </section>
+
+  <section class="card">
+    <h2>2. DFA Simulation</h2>
+    <div id="chips" class="chips"></div>
+    <div class="row controls">
+      <button id="btnPrev">⏮ Prev</button>
+      <button id="btnPlay">▶ Play</button>
+      <button id="btnNext">Next ⏭</button>
+      <label>Speed <input id="speed" type="range" min="150" max="1500" value="600"></label>
+      <span id="stepInfo" class="muted"></span>
+    </div>
+    <div class="svgwrap"><svg id="dfa" viewBox="0 0 1120 320" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    <div class="legend">
+      <span><i class="dot start"></i>Start</span>
+      <span><i class="dot cur"></i>Current state</span>
+      <span><i class="dot acc"></i>Accepting (double ring)</span>
+      <span><i class="dot dead"></i>Dead / trap state</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. Trace</h2>
+    <div class="tablewrap"><table id="trace"><thead><tr><th>#</th><th>From</th><th>Symbol</th><th>To</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="card">
+    <h2>4. Formal Definition</h2>
+    <p>The language is <b>L = { w ∈ Σ* : |w| = 10, w[1] ∈ {1..9} }</b> — exactly ten digits, first digit non-zero.</p>
+    <p class="mono">M = (Q, Σ, δ, q₀, F)</p>
+    <ul class="mono">
+      <li>Q = { q0, q1, …, q10, qd }</li>
+      <li>Σ = { 0,1,…,9 } ∪ { any other character }</li>
+      <li>q₀ = q0 &nbsp;&nbsp; F = { q10 }</li>
+      <li>δ(q0, d) = q1 for d ∈ {1..9}; δ(q0, 0) = qd</li>
+      <li>δ(qi, d) = q(i+1) for 1 ≤ i ≤ 9, d ∈ {0..9}</li>
+      <li>δ(q10, any) = qd; δ(qd, any) = qd; non-digit → qd</li>
+    </ul>
+    <h3>Transition table</h3>
+    <div class="tablewrap"><table id="ttable"></table></div>
+    <p class="muted small">Note: real PNRs are 10 digits; the first three digits identify the PRS. This project models the structural rule (length + numeric + non-zero first digit). It cannot check whether a ticket actually exists — that needs IRCTC's database.</p>
+  </section>
+</main>
+
+<footer>Built with plain HTML, CSS &amp; JavaScript — no dependencies.</footer>
+<script src="script.js"></script>
+</body>
+</html>
